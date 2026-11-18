@@ -1,0 +1,350 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090909">
+<title>RUSKLIMAT NEXT — Каталог</title>
+<style>
+:root{
+ --bg:#090909;--panel:#14130f;--panel2:#1b1913;
+ --gold:#d5ad63;--gold2:#f0d69b;--text:#f7f3e9;
+ --muted:#9e978b;--line:#393020;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.container{width:min(1240px,94%);margin:auto}
+header{background:#0b0b0a;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+.top{height:75px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-mark{width:43px;height:43px;border:1px solid var(--gold);border-radius:10px;display:grid;place-items:center;color:var(--gold);font:30px Georgia}
+.logo b{letter-spacing:3px;font-size:16px}
+.logo small{display:block;color:var(--gold);font-size:9px;letter-spacing:3px;margin-top:4px}
+nav{display:flex;gap:25px;font-size:13px;color:#ccc}
+nav a:hover{color:var(--gold)}
+.header-actions{display:flex;gap:9px}
+.icon-btn{background:#17150f;border:1px solid var(--line);color:var(--gold2);padding:11px 14px;border-radius:6px}
+.icon-btn span{margin-left:5px}
+.hero{padding:65px 0 55px;background:radial-gradient(ellipse at 80% 45%,#a27b3b25,transparent 42%),linear-gradient(110deg,#0b0b0a,#17140e);border-bottom:1px solid var(--line)}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:30px}
+.eyebrow{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
+h1{font:clamp(42px,6vw,72px)/1.08 Georgia,serif;margin:20px 0}
+.gold{color:var(--gold)}
+.hero p{max-width:540px;color:var(--muted);line-height:1.8;font-size:14px}
+.btn{display:inline-block;border:1px solid var(--gold);background:linear-gradient(130deg,var(--gold2),#b88a40);color:#17120a;padding:14px 20px;border-radius:5px;font-size:11px;font-weight:bold;letter-spacing:1px;text-transform:uppercase}
+.btn.dark{background:transparent;color:var(--gold2)}
+.hero-buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
+.hero-art{height:300px;border:1px solid var(--line);border-radius:12px;background:radial-gradient(circle at 50% 45%,#c49b5030,transparent 55%),#11100d;display:grid;place-items:center;position:relative;overflow:hidden}
+.hero-art:before{content:"R";font:260px Georgia;color:#d5ad6314;position:absolute}
+.hero-art div{position:relative;font:italic 22px Georgia;color:var(--gold2);letter-spacing:5px}
+.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:25px}
+.quick a{padding:17px;background:#13120f;border:1px solid var(--line);border-radius:7px;font-size:12px;color:#ddd}
+.quick a:hover{border-color:var(--gold);color:var(--gold2)}
+.quick b{display:block;font-size:21px;margin-bottom:7px;color:var(--gold)}
+main{padding:50px 0 90px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:25px}
+h2{font:36px Georgia;margin:10px 0}
+.sub{font-size:12px;color:var(--muted);line-height:1.7}
+.catalog-layout{display:grid;grid-template-columns:225px 1fr;gap:22px}
+.sidebar{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:19px;height:max-content;position:sticky;top:95px}
+.sidebar h3{font-size:12px;letter-spacing:2px;color:var(--gold);margin-bottom:17px}
+.filter-list{display:grid;gap:8px}
+.filter{padding:10px;border:1px solid transparent;background:#1a1813;color:#c9c2b4;text-align:left;border-radius:5px;font-size:12px}
+.filter.active,.filter:hover{border-color:var(--gold);color:var(--gold2)}
+.sidebar hr{border:0;border-top:1px solid var(--line);margin:19px 0}
+.field{width:100%;background:#0c0c0b;color:white;border:1px solid var(--line);border-radius:5px;padding:11px;margin-top:9px;outline:none}
+.field:focus{border-color:var(--gold)}
+.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:17px}
+.search{flex:1;min-width:180px}
+.toolbar select{background:#17150f;color:#eee;border:1px solid var(--line);padding:12px;border-radius:5px}
+.result-count{font-size:11px;color:var(--muted);width:100%}
+.products{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.product{background:linear-gradient(145deg,#191812,#11110f);border:1px solid var(--line);border-radius:8px;overflow:hidden;transition:.22s;position:relative}
+.product:hover{transform:translateY(-4px);border-color:#98783e}
+.product-image{height:190px;background:radial-gradient(circle at 50% 50%,#b18b4930,transparent 65%),#11110f;display:grid;place-items:center;position:relative;overflow:hidden}
+.product-image img{width:100%;height:100%;object-fit:contain;padding:18px}
+.product-image .symbol{font:76px Georgia;color:#d8b56e;opacity:.7}
+.tag{position:absolute;left:12px;top:12px;background:#b68c48;color:#17120a;font-size:9px;font-weight:bold;padding:6px 8px;border-radius:3px;text-transform:uppercase}
+.fav{position:absolute;right:11px;top:10px;border:1px solid var(--line);background:#090909c9;color:var(--gold2);width:32px;height:32px;border-radius:50%;font-size:17px}
+.product-info{padding:16px}
+.brand{font-size:9px;letter-spacing:2px;color:var(--gold);text-transform:uppercase}
+.product h3{font-size:13px;line-height:1.55;margin:9px 0;min-height:60px}
+.sku{font-size:10px;color:#777;margin-bottom:12px}
+.price-row{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+.price{font-size:20px;font-weight:bold;color:var(--gold2)}
+.old-price{font-size:11px;color:#777;text-decoration:line-through}
+.discount{font-size:10px;color:#d5ad63}
+.product-actions{display:flex;gap:7px;margin-top:14px}
+.product-actions button{flex:1;padding:10px 5px;border-radius:4px;font-size:10px;font-weight:bold}
+.add{background:var(--gold);border:1px solid var(--gold);color:#17120a}
+.details{background:transparent;border:1px solid var(--line);color:#ddd}
+.empty{grid-column:1/-1;padding:50px 15px;text-align:center;border:1px dashed var(--line);color:var(--muted)}
+.promo{margin-top:65px;padding:35px;border:1px solid var(--gold);border-radius:9px;background:radial-gradient(ellipse at 90% 50%,#ad813426,transparent 45%),#14120e;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.promo h2{font-size:30px}
+.promo p{font-size:12px;color:var(--muted)}
+footer{border-top:1px solid var(--line);padding:28px 0;color:#777;font-size:10px}
+.footer-row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.modal-bg{display:none;position:fixed;inset:0;background:#000b;z-index:50;align-items:center;justify-content:center;padding:15px}
+.modal-bg.open{display:flex}
+.modal{background:#15140f;border:1px solid var(--gold);border-radius:9px;width:min(620px,100%);max-height:85vh;overflow:auto;padding:23px}
+.modal-top{display:flex;justify-content:space-between;gap:15px;align-items:center}
+.close{background:none;border:0;color:var(--gold);font-size:25px}
+.modal p{color:var(--muted);font-size:13px;line-height:1.8;margin:15px 0}
+.cart-item{display:flex;justify-content:space-between;gap:15px;border-bottom:1px solid var(--line);padding:13px 0;font-size:12px}
+.cart-item button{background:none;color:var(--gold);border:0}
+.compare-table{width:100%;border-collapse:collapse;margin-top:15px;font-size:12px}
+.compare-table td,.compare-table th{border:1px solid var(--line);padding:10px;text-align:left}
+.compare-table th{color:var(--gold)}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#211c11;border:1px solid var(--gold);padding:12px 18px;border-radius:6px;color:var(--gold2);font-size:12px;display:none;z-index:80}
+@media(max-width:900px){.products{grid-template-columns:repeat(2,minmax(0,1fr))}.hero-grid{grid-template-columns:1fr .7fr}.hero-art{height:240px}}
+@media(max-width:650px){
+ nav{display:none}.top{height:68px}.hero-grid{grid-template-columns:1fr}.hero-art{display:none}
+ .quick{grid-template-columns:repeat(2,1fr)}
+ .catalog-layout{grid-template-columns:1fr}
+ .sidebar{position:static}
+ .products{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .product-image{height:145px}
+ .product-info{padding:11px}
+ .product h3{font-size:11px;min-height:70px}
+ .price{font-size:16px}
+ .product-actions{flex-direction:column}
+ .section-head{display:block}
+ .promo{display:block;padding:24px}
+ .promo .btn{margin-top:18px}
+}
+@media(max-width:380px){.products{grid-template-columns:1fr}.product-image{height:210px}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="container top">
+<a class="logo" href="#">
+ <span class="logo-mark">R</span>
+ <span><b>RUSKLIMAT</b><small>NEXT · PREMIUM</small></span>
+</a>
+<nav>
+ <a href="#">Главная</a><a href="#catalog">Каталог</a>
+ <a href="#about">О проекте</a>
+</nav>
+<div class="header-actions">
+ <button class="icon-btn" onclick="openCompare()">⇄ <span id="compareCount">0</span></button>
+ <button class="icon-btn" onclick="openCart()">Корзина <span id="cartCount">0</span></button>
+</div>
+</div>
+</header>
+
+<section class="hero">
+<div class="container">
+ <div class="hero-grid">
+  <div>
+   <div class="eyebrow">Инженерные решения нового уровня</div>
+   <h1>Технологии<br><span class="gold">комфорта.</span></h1>
+   <p>Климатическая техника и инженерное оборудование для дома, бизнеса и крупных объектов. Выбирайте товары в удобном каталоге RUSKLIMAT NEXT.</p>
+   <div class="hero-buttons">
+    <a class="btn" href="#catalog">Перейти в каталог</a>
+    <a class="btn dark" href="https://www.rusklimat.ru/" target="_blank">Официальный сайт ↗</a>
+   </div>
+  </div>
+  <div class="hero-art"><div>RUSKLIMAT NEXT</div></div>
+ </div>
+ <div class="quick">
+  <a href="#catalog" onclick="setCategory('Кондиционеры')"><b>❄</b>Кондиционеры</a>
+  <a href="#catalog" onclick="setCategory('Водонагреватели')"><b>♨</b>Водонагреватели</a>
+  <a href="#catalog" onclick="setCategory('Вентиляция')"><b>◉</b>Вентиляция</a>
+  <a href="#catalog" onclick="setCategory('Все')"><b>✦</b>Все товары</a>
+ </div>
+</div>
+</section>
+
+<main class="container" id="catalog">
+<div class="section-head">
+ <div><div class="eyebrow">Подбор оборудования</div><h2>Каталог <span class="gold">товаров</span></h2>
+ <p class="sub">Выбирайте оборудование, сравнивайте характеристики и переходите к покупке.</p></div>
+</div>
+
+<div class="catalog-layout">
+<aside class="sidebar">
+ <h3>КАТЕГОРИИ</h3>
+ <div class="filter-list">
+  <button class="filter active" onclick="setCategory('Все')">Все товары</button>
+  <button class="filter" onclick="setCategory('Кондиционеры')">Кондиционеры</button>
+  <button class="filter" onclick="setCategory('Водонагреватели')">Водонагреватели</button>
+  <button class="filter" onclick="setCategory('Вентиляция')">Вентиляция</button>
+ </div>
+ <hr>
+ <h3>ЦЕНА, ₽</h3>
+ <input class="field" id="minPrice" type="number" placeholder="От">
+ <input class="field" id="maxPrice" type="number" placeholder="До">
+ <button class="btn" style="width:100%;margin-top:12px" onclick="render()">Применить</button>
+ <hr>
+ <p class="sub">Цены в демонстрационном каталоге — снимок данных официального сайта. Они могут изменяться в зависимости от региона и даты.</p>
+</aside>
+
+<div>
+ <div class="toolbar">
+  <input class="field search" id="search" placeholder="⌕  Поиск по названию или бренду..." oninput="render()">
+  <select id="sort" onchange="render()">
+   <option value="popular">Сначала популярные</option>
+   <option value="low">Сначала дешевле</option>
+   <option value="high">Сначала дороже</option>
+   <option value="name">По названию</option>
+  </select>
+  <div class="result-count" id="resultCount"></div>
+ </div>
+ <div class="products" id="products"></div>
+</div>
+</div>
+
+<section class="promo" id="about">
+<div><div class="eyebrow">RUSKLIMAT NEXT</div><h2>Выбрали оборудование?</h2><p>Проверьте актуальную цену, наличие и условия доставки на официальном сайте.</p></div>
+<a class="btn" href="https://www.rusklimat.ru/catalog" target="_blank">Открыть официальный каталог ↗</a>
+</section>
+</main>
+
+<footer>
+<div class="container footer-row">
+<span>© RUSKLIMAT NEXT · Концепция независимой витрины</span>
+<span>Цены и наличие уточняйте на официальном сайте. Не является официальным сайтом холдинга.</span>
+</div>
+</footer>
+
+<div class="modal-bg" id="modalBg" onclick="if(event.target===this)closeModal()">
+<div class="modal"><div class="modal-top"><h2 id="modalTitle">Информация</h2><button class="close" onclick="closeModal()">×</button></div><div id="modalContent"></div></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const official="https://www.rusklimat.ru";
+const products=[
+{id:1,name:"Сплит-система Ballu Odyssey Pro DC BSOI-10HN8/ERP",brand:"Ballu",cat:"Кондиционеры",price:32121,old:35690,sku:"НС-1762807",symbol:"❄",image:"https://rkcdn.ru/products/b8aef22d-2758-11f1-b8e1-00505601218a/thumb.webp",desc:"Инверторная сплит-система. Площадь помещения до 29 м², охлаждение 2,64 кВт, обогрев 2,93 кВт, класс энергоэффективности A++.",url:official+"/product/split-sistema-invertornogo-tipa-ballu-odyssey-pro-dc-bsoi-10hn8-erp-komplekt"},
+{id:2,name:"Сплит-система Ballu Odyssey Pro DC BSOI-12HN8/ERP",brand:"Ballu",cat:"Кондиционеры",price:39231,old:43590,sku:"НС-1762812",symbol:"❄",desc:"Инверторная сплит-система серии Odyssey Pro DC.",url:official+"/catalog/konditsionery"},
+{id:3,name:"Сплит-система Ballu Odyssey Pro DC BSOI-08HN8/ERP",brand:"Ballu",cat:"Кондиционеры",price:30681,old:34090,sku:"НС-1762804",symbol:"❄",desc:"Инверторная сплит-система серии Odyssey Pro DC.",url:official+"/catalog/konditsionery"},
+{id:4,name:"Сплит-система Royal Thermo Diamond DC RTDI-07HN8/Wi-Fi",brand:"Royal Thermo",cat:"Кондиционеры",price:27810,old:30900,sku:"НС-1701508",symbol:"❄",desc:"Инверторная сплит-система Royal Thermo Diamond DC.",url:official+"/catalog/konditsionery"},
+{id:5,name:"Кондиционер мобильный Ballu Orbis BPAC-07 OR/N6",brand:"Ballu",cat:"Кондиционеры",price:19118,old:21242,sku:"НС-1598899",symbol:"▤",desc:"Мобильный кондиционер. В каталоге указаны режим осушения, авторестарт и класс энергоэффективности A.",url:official+"/catalog/konditsionery"},
+{id:6,name:"Кондиционер мобильный Ballu Aura BPAC-09 CP/N1_24Y",brand:"Ballu",cat:"Кондиционеры",price:26722,old:29691,sku:"НС-1594919",symbol:"▤",desc:"Мобильный кондиционер Ballu Aura.",url:official+"/catalog/konditsionery"},
+{id:7,name:"Водонагреватель Ballu BWH/S 30 Shell",brand:"Ballu",cat:"Водонагреватели",price:9133,old:9820,sku:"НС-1291248",symbol:"♨",image:"https://rkcdn.ru/products/67e88856-3264-11ed-b732-005056013a69/thumb.webp",desc:"Электрический накопительный водонагреватель. В официальной карточке указаны защита от коррозии, перегрева и накипи.",url:official+"/product/vodonagrevatel-ballu-bwh-s-30-shell"},
+{id:8,name:"Водонагреватель Ballu BWH/S 80 Shell",brand:"Ballu",cat:"Водонагреватели",price:13513,old:14530,sku:"НС-1291250",symbol:"♨",desc:"Электрический накопительный водонагреватель серии Shell.",url:official+"/catalog/vodonagrevateli"},
+{id:9,name:"Водонагреватель Ballu BWH/S 80 Artendo DH",brand:"Ballu",cat:"Водонагреватели",price:22274,old:23950,sku:"НС-1602427",symbol:"♨",desc:"Накопительный водонагреватель Ballu Artendo DH.",url:official+"/catalog/vodonagrevateli"},
+{id:10,name:"Водонагреватель Ballu BWH/S 50 Level PRO",brand:"Ballu",cat:"Водонагреватели",price:12713,old:13670,sku:"НС-1340302",symbol:"♨",desc:"Водонагреватель Ballu Level PRO.",url:official+"/catalog/vodonagrevateli"},
+{id:11,name:"Водонагреватель Ballu BWH/S 30 Rodon SP",brand:"Ballu",cat:"Водонагреватели",price:9737,old:10470,sku:"НС-1602447",symbol:"♨",desc:"Накопительный водонагреватель Ballu Rodon SP.",url:official+"/catalog/vodonagrevateli"},
+{id:12,name:"Очиститель воздуха приточный Ballu ONEAIR ASP-100 серый",brand:"Ballu",cat:"Вентиляция",price:36838,old:37590,sku:"НС-1491996",symbol:"◎",desc:"Приточный очиститель воздуха Ballu ONEAIR ASP-100.",url:official+"/catalog/ventilyatsiya"},
+{id:13,name:"Очиститель воздуха приточный Ballu ONEAIR ASP-100 белый",brand:"Ballu",cat:"Вентиляция",price:36838,old:37590,sku:"НС-1496444",symbol:"◎",desc:"Приточный очиститель воздуха Ballu ONEAIR ASP-100.",url:official+"/catalog/ventilyatsiya"},
+{id:14,name:"Очиститель воздуха приточный Ballu ONEAIR ASP-80",brand:"Ballu",cat:"Вентиляция",price:21550,old:21990,sku:"НС-1246466",symbol:"◎",desc:"Приточный очиститель воздуха Ballu ONEAIR ASP-80.",url:official+"/catalog/ventilyatsiya"},
+{id:15,name:"Очиститель воздуха приточный Ballu ONEAIR ASP-200S",brand:"Ballu",cat:"Вентиляция",price:56349,old:60590,sku:"НС-1428459",symbol:"◎",desc:"Приточный очиститель воздуха Ballu ONEAIR ASP-200S.",url:official+"/catalog/ventilyatsiya"}
+];
+
+let category="Все";
+let cart=[];
+let compare=[];
+let favorites=[];
+
+const money=n=>n.toLocaleString("ru-RU")+" ₽";
+
+function render(){
+ const query=document.getElementById("search").value.toLowerCase().trim();
+ const min=Number(document.getElementById("minPrice").value)||0;
+ const max=Number(document.getElementById("maxPrice").value)||Infinity;
+ let list=products.filter(p=>
+  (category==="Все"||p.cat===category)&&
+  (p.name+" "+p.brand+" "+p.sku).toLowerCase().includes(query)&&
+  p.price>=min&&p.price<=max
+ );
+ const sort=document.getElementById("sort").value;
+ if(sort==="low")list.sort((a,b)=>a.price-b.price);
+ if(sort==="high")list.sort((a,b)=>b.price-a.price);
+ if(sort==="name")list.sort((a,b)=>a.name.localeCompare(b.name,"ru"));
+ document.getElementById("resultCount").textContent="Найдено товаров: "+list.length;
+ document.getElementById("products").innerHTML=list.length?list.map(p=>`
+ <article class="product">
+  <div class="product-image">
+   <span class="tag">${p.cat}</span>
+   <button class="fav" onclick="toggleFav(${p.id})">${favorites.includes(p.id)?"♥":"♡"}</button>
+   ${p.image?`<img src="${p.image}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">`:""}
+   <span class="symbol" style="${p.image?"display:none":""}">${p.symbol}</span>
+  </div>
+  <div class="product-info">
+   <div class="brand">${p.brand}</div>
+   <h3>${p.name}</h3>
+   <div class="sku">Артикул: ${p.sku}</div>
+   <div class="price-row"><span class="price">${money(p.price)}</span><span class="old-price">${money(p.old)}</span></div>
+   <div class="discount">Экономия ${money(p.old-p.price)}</div>
+   <div class="product-actions">
+    <button class="add" onclick="addCart(${p.id})">В корзину</button>
+    <button class="details" onclick="details(${p.id})">Подробнее</button>
+   </div>
+   <button class="details" style="width:100%;margin-top:7px;padding:9px" onclick="toggleCompare(${p.id})">${compare.includes(p.id)?"✓ В сравнении":"⇄ Сравнить"}</button>
+  </div>
+ </article>`).join(""):'<div class="empty">По вашему запросу ничего не найдено. Попробуйте изменить фильтры.</div>';
+ updateCounts();
+}
+function setCategory(c){
+ category=c;
+ document.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active",b.textContent.trim()===(c==="Все"?"Все товары":c)));
+ render();
+}
+function updateCounts(){
+ document.getElementById("cartCount").textContent=cart.length;
+ document.getElementById("compareCount").textContent=compare.length;
+}
+function toast(msg){
+ const t=document.getElementById("toast");t.textContent=msg;t.style.display="block";
+ setTimeout(()=>t.style.display="none",1800);
+}
+function addCart(id){cart.push(id);updateCounts();toast("Товар добавлен в корзину");}
+function toggleFav(id){
+ favorites.includes(id)?favorites=favorites.filter(x=>x!==id):favorites.push(id);
+ render();
+}
+function toggleCompare(id){
+ compare.includes(id)?compare=compare.filter(x=>x!==id):compare.length<4?compare.push(id):toast("Можно сравнить максимум 4 товара");
+ updateCounts();render();
+}
+function openModal(title,html){
+ document.getElementById("modalTitle").textContent=title;
+ document.getElementById("modalContent").innerHTML=html;
+ document.getElementById("modalBg").classList.add("open");
+}
+function closeModal(){document.getElementById("modalBg").classList.remove("open")}
+function details(id){
+ const p=products.find(x=>x.id===id);
+ openModal(p.name,`
+ <p><b style="color:var(--gold)">Бренд:</b> ${p.brand}</p>
+ <p><b style="color:var(--gold)">Категория:</b> ${p.cat}</p>
+ <p><b style="color:var(--gold)">Артикул:</b> ${p.sku}</p>
+ <p>${p.desc}</p>
+ <h2 class="gold">${money(p.price)}</h2>
+ <p>Цена указана как демонстрационный снимок каталога. Проверьте актуальную стоимость и наличие у продавца.</p>
+ <a class="btn" target="_blank" href="${p.url}">Открыть товар на сайте продавца ↗</a>
+ `);
+}
+function openCart(){
+ if(!cart.length){openModal("Корзина","<p>Корзина пока пустая. Добавьте товары из каталога.</p>");return}
+ let counts={};cart.forEach(id=>counts[id]=(counts[id]||0)+1);
+ let total=0;
+ let html=Object.keys(counts).map(id=>{
+  const p=products.find(x=>x.id==id);total+=p.price*counts[id];
+  return `<div class="cart-item"><span>${p.name} × ${counts[id]}</span><b>${money(p.price*counts[id])}</b><button onclick="removeCart(${id})">Удалить</button></div>`;
+ }).join("");
+ openModal("Ваша корзина",html+`<h2 class="gold">Итого: ${money(total)}</h2><p>Корзина работает как подборка товаров. Для покупки перейдите в официальный магазин.</p><a class="btn" href="${official}/catalog" target="_blank">Перейти к покупке ↗</a>`);
+}
+function removeCart(id){cart=cart.filter(x=>x!==id);updateCounts();openCart()}
+function openCompare(){
+ const list=compare.map(id=>products.find(p=>p.id===id)).filter(Boolean);
+ if(!list.length){openModal("Сравнение","<p>Добавьте товары кнопкой «Сравнить».</p>");return}
+ let html='<table class="compare-table"><tr><th>Характеристика</th>'+list.map(p=>`<th>${p.name}</th>`).join("")+'</tr>';
+ [["Бренд",p=>p.brand],["Категория",p=>p.cat],["Артикул",p=>p.sku],["Цена",p=>money(p.price)],["Описание",p=>p.desc]].forEach(row=>{
+  html+='<tr><td>'+row[0]+'</td>'+list.map(p=>`<td>${row[1](p)}</td>`).join("")+'</tr>';
+ });
+ html+='</table>';
+ openModal("Сравнение товаров",html);
+}
+document.getElementById("search").addEventListener("keydown",e=>{if(e.key==="Escape"){e.target.value="";render()}});
+render();
+</script>
+</body>
+</html>
